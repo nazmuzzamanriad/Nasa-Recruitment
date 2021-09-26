@@ -1,10 +1,11 @@
 import React from 'react';
 import './ShowData.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCoffee } from '@fortawesome/free-solid-svg-icons'
+import { faShoppingCart } from '@fortawesome/free-solid-svg-icons'
 
 const ShowData = (props) => {
-    console.log(props)
+    const element = <FontAwesomeIcon icon={faShoppingCart} />
+    console.log(props.researcher)
     const { name, picture, company, balance, age, phone } = props.researcher;
     return (
 
@@ -22,7 +23,7 @@ const ShowData = (props) => {
                         <p className="card-text">Company: {company}</p>
                         <p className="card-text">Phone: {phone}</p>
                         <p className="card-text">Balance: {balance}</p>
-                        <button className='cart-button'>Add To Cart</button>
+                        <button onClick={() => props.handleCartButton(props.researcher)} className='cart-button'>{element} Add To Cart</button>
                     </div>
                 </div>
             </div>

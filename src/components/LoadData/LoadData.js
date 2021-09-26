@@ -1,14 +1,34 @@
 import React, { useEffect, useState } from 'react';
+import Cart from '../Cart/Cart';
 import ShowData from '../ShowData/ShowData';
 import './LoadData.css'
 
 const LoadData = () => {
+
+
     const [researchers, setResearchers] = useState([]);
+    const [cart, setCart] = useState([]);
+
     useEffect(() => {
         fetch('./data.json')
             .then(res => res.json())
             .then(data => setResearchers(data))
-    }, [])
+    }, []);
+
+
+
+
+    const handleCartButton = (property) => {
+        const newCart = [...cart, property];
+        setCart(newCart)
+
+
+
+    }
+
+
+
+
     return (
         <div className='ui-representation'>
 
@@ -18,7 +38,7 @@ const LoadData = () => {
 
 
                     {
-                        researchers.map(researcher => <ShowData key={researcher._id} researcher={researcher}></ShowData>)
+                        researchers.map(researcher => <ShowData handleCartButton={handleCartButton} key={researcher._id} researcher={researcher}></ShowData>)
                     }
 
 
@@ -28,16 +48,18 @@ const LoadData = () => {
 
             </div>
             <div className='cart'>
-                <h3>
-                    Person Added:
-
-                </h3>
-                <h4>Total Amount:</h4>
+                <Cart cart={cart}></Cart>
 
             </div>
 
         </div>
     );
+
+
 };
+
+
+
+
 
 export default LoadData;
